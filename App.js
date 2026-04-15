@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './screen/HomeScreen';
 import Login from './screen/Login';
+import Cadastro from './screen/Cadastro';
 
 export default function App() {
 
@@ -21,6 +22,11 @@ export default function App() {
         <Stack.Screen
           name="login"
           component={Login}
+        />
+        <Stack.Screen
+          name="Cadastro"
+          component={Cadastro}
+          options={{ title: 'Cadastro' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
