@@ -7,11 +7,13 @@ import HomeScreen from './screen/HomeScreen';
 import Cadastro from './screen/Cadastro';
 import Login from './screen/Login';
 import Cadastro from './screen/Cadastro';
+import RecoverScreen from './screen/RecoverScreen';
+
 
 export default function App() {
 
   const Stack = createNativeStackNavigator();
-
+  //Retirar o Recover como tela inicial antes de subir main
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Cadastro">
