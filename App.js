@@ -16,7 +16,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Recover">
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Página Inicial' }}/>
         <Stack.Screen name="Recover" component={RecoverScreen} options={{title: "Recuperar Senha"}} />
-        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
