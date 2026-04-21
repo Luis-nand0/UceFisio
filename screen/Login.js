@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { TextInput, View } from "react-native-web";
+import { TextInput, View, Text } from "react-native-web";
 
 export default function Login({ navigation }){
     const [email, setEmail] = useState('')
@@ -19,9 +19,15 @@ export default function Login({ navigation }){
         <View>
             <TextInput placeholder="Email" onChangeText={setEmail}></TextInput>
             <TextInput placeholder="Senha" onChangeText={setSenha}></TextInput>
-            <TouchableOpacity onPress={sendLogin}>Entrar</TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navitage('cadastro')}}>Não tem cadastro ? cadastre-se</TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navitage('passRecover')}}>Recuperar senha</TouchableOpacity>
+            <TouchableOpacity onPress={sendLogin}>
+                <Text>Entrar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>{navigation.navigate('cadastro')}}>
+                <Text> Não tem cadastro ? cadastre-se </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>{navigation.navigate('passRecover')}}>
+                <Text> Recuperar senha </Text>
+            </TouchableOpacity>
         </View>
     )
 }
