@@ -5,7 +5,7 @@ export default function Cadastro({ navigation }) {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-
+//Pull
   const handleRegister = () => {
     try {
       if (!nome || !email || !senha) {
