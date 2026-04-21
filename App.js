@@ -8,9 +8,6 @@ import Cadastro from './screen/Cadastro';
 import Login from './screen/Login';
 import RecoverScreen from './screen/RecoverScreen';
 
-import Cadastro from './screen/Cadastro';
-import RecoverScreen from './screen/RecoverScreen';
-
 
 export default function App() {
 
@@ -21,6 +18,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Página Inicial' }}/>
         <Stack.Screen name="Recover" component={RecoverScreen} options={{title: "Recuperar Senha"}} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="cadastro" component={Cadastro} />
       </Stack.Navigator>
     </NavigationContainer>
   );
