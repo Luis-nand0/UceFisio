@@ -1,9 +1,9 @@
-import { View } from "react-native-web";
+import { View } from "react-native";
 
 export default function HomeScreen(){
     return(
         <View>
-            Home
+            <Text>Home</Text>
         </View>
     )
 }
