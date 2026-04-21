@@ -6,6 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screen/HomeScreen';
 import Cadastro from './screen/Cadastro';
 import Login from './screen/Login';
+import RecoverScreen from './screen/RecoverScreen';
+
 import Cadastro from './screen/Cadastro';
 import RecoverScreen from './screen/RecoverScreen';
 
@@ -13,29 +15,13 @@ import RecoverScreen from './screen/RecoverScreen';
 export default function App() {
 
   const Stack = createNativeStackNavigator();
-  //Retirar o Recover como tela inicial antes de subir main
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Cadastro">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Página Inicial' }}
-        />
-        <Stack.Screen
-          name="Cadastro"
-          component={Cadastro}
-          options={{ title: 'Cadastro' }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={Login}
-        />
-        <Stack.Screen
-          name="Cadastro"
-          component={Cadastro}
-          options={{ title: 'Cadastro' }}
-        />
+        <Stack.Navigator initialRouteName="Recover">
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Página Inicial' }}/>
+        <Stack.Screen name="Recover" component={RecoverScreen} options={{title: "Recuperar Senha"}} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
