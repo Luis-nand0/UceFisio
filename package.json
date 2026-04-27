@@ -1,7 +1,7 @@
 {
   "name": "aula-1776214708475",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -17,6 +17,9 @@
     "expo-asset": "~12.0.12",
     "expo-constants": "~18.0.13",
     "expo-file-system": "~19.0.21",
+    "expo-linking": "~8.0.12",
+    "expo-navigation-bar": "~5.0.10",
+    "expo-router": "~6.0.23",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-dom": "19.1.0",
