@@ -110,6 +110,19 @@ export default function PerfilComponent() {
             />
           </View>
         </View>
+  
+          <Text style={styles.cardLabel}>CONFIGURAÇÕES E SUPORTE</Text>    
+          <View style={[styles.row, styles.card]}>
+              <Text>Lembretes</Text>              
+          </View>
+          <View style={[styles.row, styles.card]}>
+              <Text>Notificações</Text>              
+          </View>
+          <View style={[styles.row, styles.card]}>
+              <Text>Privacidade e Dados</Text>              
+          </View>
+
+          
         
       </ScrollView>
     </SafeAreaView>
