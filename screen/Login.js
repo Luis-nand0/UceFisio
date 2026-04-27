@@ -78,7 +78,7 @@ export default function Login({ navigation }) {
                         <Text style={styles.linkText}>Não tem cadastro? Cadastre-se</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.linkButton} onPress={() => navigation.navigate('passRecover')}>
+                    <TouchableOpacity style={styles.linkButton} onPress={() => navigation.navigate('Recover')}>
                         <Text style={styles.linkText}>Recuperar senha</Text>
                     </TouchableOpacity>
                 </View>

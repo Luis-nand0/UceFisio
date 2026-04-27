@@ -14,7 +14,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Recover">
+        <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Página Inicial' }}/>
         <Stack.Screen name="Recover" component={RecoverScreen} options={{title: "Recuperar Senha"}} />
         <Stack.Screen name="Login" component={Login} />

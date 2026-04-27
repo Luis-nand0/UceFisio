@@ -9,7 +9,6 @@ export default function RecoverScreen({ navigation }) {
     const [newPassword, setNewPassword] = useState('');
     const [code, setCode] = useState('');
     
-    // ESTADO PARA MOSTRAR/ESCONDER SENHA
     const [esconderSenha, setEsconderSenha] = useState(true);
 
     const primaryColor = "#3abdb2";
