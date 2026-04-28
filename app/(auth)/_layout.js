@@ -8,20 +8,17 @@ export default function AuthLayout() {
         headerTintColor: '#000',
       }}
     >
-      {/* O "name" deve ser exatamente o nome do arquivo .js 
-        que está na mesma pasta. 
-      */}
       <Stack.Screen 
         name="Login" 
         options={{ headerShown: false }} 
       />
       <Stack.Screen 
         name="Cadastro" 
-        options={{ title: 'Criar Conta' }} 
+        options={{ headerShown: false }} 
       />
       <Stack.Screen 
         name="RecoverScreen" 
-        options={{ title: 'Recuperar Senha' }} 
+        options={{ headerShown: false }} 
       />
     </Stack>
   );

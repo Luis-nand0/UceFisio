@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView, ScrollView } from "react-native";
+import { Text, TextInput, TouchableOpacity, View, SafeAreaView, ScrollView, Alert, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
-export default function Login({ navigation }) {
+//estilo
+import { Colors, GlobalStyles } from '../../constants/Theme'; 
+
+export default function Login() {
+    const router = useRouter();
+    
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    
     const [esconderSenha, setEsconderSenha] = useState(true);
 
-    const primaryColor = "#3abdb2";
-
+    //funcao login
     const sendLogin = () => {
         const mockLogin = {
             'Email': 'teste@teste',
@@ -18,9 +22,9 @@ export default function Login({ navigation }) {
 
         if (email === mockLogin.Email && senha === mockLogin.Senha) {
             console.log('logado');
+            router.replace('/HomeScreen'); 
         } else {
-            console.log('usuário não encontrado');
-            alert("Usuário não encontrado!");
+            Alert.alert("Erro", "Usuário ou senha inválidos!");
         }
     };
 
@@ -29,15 +33,16 @@ export default function Login({ navigation }) {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 
                 <View style={styles.header}>
-                    <Text style={[styles.brand, { color: primaryColor }]}>APP FISIO</Text>
+                    <Text style={[styles.brand, { color: Colors.primary }]}>APP FISIO</Text>
                 </View>
 
-                <View style={styles.card}>
+
+                <View style={GlobalStyles.card}>
                     <Text style={styles.title}>Login</Text>
                     
                     <Text style={styles.label}>E-MAIL</Text>
-                    <View style={styles.inputContainer}>
-                        <MaterialCommunityIcons name="email-outline" size={20} color={primaryColor} style={styles.iconStyle} />
+                    <View style={GlobalStyles.inputContainer}>
+                        <MaterialCommunityIcons name="email-outline" size={20} color={Colors.primary} style={styles.iconStyle} />
                         <TextInput 
                             style={styles.input}
                             placeholder="exemplo@email.com" 
@@ -49,8 +54,8 @@ export default function Login({ navigation }) {
                     </View>
 
                     <Text style={styles.label}>SENHA</Text>
-                    <View style={styles.inputContainer}>
-                        <MaterialCommunityIcons name="lock-outline" size={20} color={primaryColor} style={styles.iconStyle} />
+                    <View style={GlobalStyles.inputContainer}>
+                        <MaterialCommunityIcons name="lock-outline" size={20} color={Colors.primary} style={styles.iconStyle} />
                         <TextInput 
                             style={styles.input}
                             placeholder="Digite sua senha" 
@@ -65,20 +70,20 @@ export default function Login({ navigation }) {
                             <MaterialCommunityIcons 
                                 name={esconderSenha ? "eye-off-outline" : "eye-outline"} 
                                 size={22} 
-                                color="#b2bec3" 
+                                color={Colors.gray} 
                             />
                         </TouchableOpacity>
                     </View>
 
-                    <TouchableOpacity style={[styles.button, { backgroundColor: primaryColor }]} onPress={sendLogin}>
-                        <Text style={styles.buttonText}>Entrar</Text>
+                    <TouchableOpacity style={GlobalStyles.button} onPress={sendLogin}>
+                        <Text style={GlobalStyles.buttonText}>Entrar</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.linkButton} onPress={() => navigation.navigate('cadastro')}>
+                    <TouchableOpacity style={styles.linkButton} onPress={() => router.push('/Cadastro')}>
                         <Text style={styles.linkText}>Não tem cadastro? Cadastre-se</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.linkButton} onPress={() => navigation.navigate('Recover')}>
+                    <TouchableOpacity style={styles.linkButton} onPress={() => router.push('/RecoverScreen')}>
                         <Text style={styles.linkText}>Recuperar senha</Text>
                     </TouchableOpacity>
                 </View>
@@ -88,45 +93,17 @@ export default function Login({ navigation }) {
     );
 }
 
+
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#f4f7f6" },
+    container: { flex: 1, backgroundColor: Colors.background },
     scrollContainer: { flexGrow: 1, justifyContent: 'center', padding: 25 },
     header: { alignItems: 'center', marginBottom: 40 },
     brand: { fontSize: 22, fontWeight: 'bold', letterSpacing: 1 },
-    card: { 
-        backgroundColor: '#ffffff', borderRadius: 25, padding: 30, 
-        elevation: 5, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, 
-        shadowOpacity: 0.1, shadowRadius: 10 
-    },
-    title: { fontSize: 24, fontWeight: '800', color: '#2d3436', textAlign: 'center', marginBottom: 10 },
-    subtitle: { fontSize: 14, color: '#636e72', textAlign: 'center', marginBottom: 25, lineHeight: 20 },
-    label: { fontSize: 11, fontWeight: 'bold', color: '#b2bec3', marginBottom: 8, letterSpacing: 1 },
-    
-    inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#f1f3f5',
-        borderRadius: 12,
-        marginBottom: 20,
-        paddingHorizontal: 15,
-    },
-    iconStyle: {
-        marginRight: 10,
-    },
-    input: {
-        flex: 1,
-        height: 55,
-        fontSize: 16,
-        color: '#2d3436',
-    },
-    eyeButton: {
-        paddingLeft: 10,
-    },
-
-    button: { height: 55, borderRadius: 12, justifyContent: 'center', alignItems: 'center', marginTop: 10 },
-    buttonText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
+    title: { fontSize: 24, fontWeight: '800', color: Colors.text, textAlign: 'center', marginBottom: 10 },
+    label: { fontSize: 11, fontWeight: 'bold', color: Colors.gray, marginBottom: 8, letterSpacing: 1 },
+    iconStyle: { marginRight: 10 },
+    input: { flex: 1, height: 55, fontSize: 16, color: Colors.text },
+    eyeButton: { paddingLeft: 10 },
     linkButton: { marginTop: 20, alignItems: 'center' },
-    linkText: { color: '#636e72', fontSize: 14 },
-    footer: { marginTop: 50, alignItems: 'center' },
-    footerText: { fontSize: 10, color: '#b2bec3', letterSpacing: 1 }
+    linkText: { color: Colors.textLight, fontSize: 14 }
 });
