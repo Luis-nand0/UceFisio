@@ -7,18 +7,16 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
-  Dimensions,
 } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-
-const { width } = Dimensions.get('window');
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Colors, GlobalStyles } from '../../constants/Theme'; // Importando seu padrão
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         
-        {/* HEADER SECTION */}
+        {/* HEADER SECTION - Alinhado com o estilo do Perfil */}
         <View style={styles.header}>
           <View style={styles.headerTextContainer}>
             <Text style={styles.greeting}>Olá, Ana!</Text>
@@ -26,23 +24,22 @@ const HomeScreen = () => {
               Seu cuidado diário faz toda a diferença na sua recuperação.
             </Text>
           </View>
-          <View style={styles.headerIcons}>
-            <TouchableOpacity style={styles.notificationBtn}>
-              <Feather name="bell" size={26} color="#1e293b" />
-              <View style={styles.dot} />
-            </TouchableOpacity>
-            <Image 
-              source={{ uri: 'https://i.imgur.com/3n7S6nL.png' }} // Substitua pela sua imagem
-              style={styles.profileImg}
-            />
-          </View>
+          <TouchableOpacity style={styles.notificationBtn}>
+            <MaterialCommunityIcons name="bell-outline" size={26} color={Colors.text} />
+            <View style={styles.dot} />
+          </TouchableOpacity>
         </View>
 
-        {/* PLANO DE HOJE CARD */}
-        <View style={styles.mainCard}>
+        {/* PLANO DE HOJE - Usando GlobalStyles.card */}
+        <View style={GlobalStyles.card}>
           <View style={styles.cardHeader}>
-            <Text style={styles.cardTitle}>Seu plano de hoje</Text>
-            <Text style={styles.exerciseCount}>1 exercício</Text>
+            <View style={styles.titleRow}>
+              <MaterialCommunityIcons name="calendar-check" size={20} color={Colors.primary} />
+              <Text style={styles.cardTitle}>Plano de hoje</Text>
+            </View>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>1 exercício</Text>
+            </View>
           </View>
 
           <View style={styles.exerciseBox}>
@@ -50,35 +47,44 @@ const HomeScreen = () => {
               <Text style={styles.exerciseName}>Mobilidade de Ombro</Text>
               <Text style={styles.exerciseDetail}>Pós-cirúrgico • Câncer de mama</Text>
               <View style={styles.timeRow}>
-                <Feather name="clock" size={16} color="#64748b" />
+                <MaterialCommunityIcons name="clock-outline" size={16} color={Colors.gray} />
                 <Text style={styles.timeText}>12 min</Text>
               </View>
             </View>
             <Image 
-              source={{ uri: 'https://i.imgur.com/k6K6K6K.png' }} // Substitua pela sua imagem
+              source={{ uri: 'https://i.pravatar.cc/100?u=ex1' }} 
               style={styles.exerciseImg}
             />
           </View>
 
-          <TouchableOpacity style={styles.startButton}>
-            <Text style={styles.startButtonText}>Iniciar exercício</Text>
+          <TouchableOpacity style={[GlobalStyles.button, { marginTop: 20 }]} onPress={() => {}}>
+            <Text style={GlobalStyles.buttonText}>Iniciar exercício</Text>
           </TouchableOpacity>
         </View>
 
-        {/* PROGRESSO CARD */}
-        <View style={styles.progressCard}>
-          <Text style={styles.cardTitle}>Seu progresso</Text>
+        {/* PROGRESSO CARD - Estilo "Meta Semanal" do perfil */}
+        <View style={[GlobalStyles.card, styles.progressCard]}>
+          <View style={styles.cardHeader}>
+            <View style={styles.titleRow}>
+              <MaterialCommunityIcons name="trending-up" size={20} color={Colors.primary} />
+              <Text style={styles.cardTitle}>Seu progresso</Text>
+            </View>
+          </View>
           
           <View style={styles.progressRow}>
-            {/* Círculo de Progresso */}
-            <View style={styles.progressCircle}>
+            {/* Círculo de Progresso Customizado */}
+            <View style={[styles.progressCircle, { borderColor: Colors.primary }]}>
               <Text style={styles.progressPercent}>78%</Text>
             </View>
 
             <View style={styles.progressTextContainer}>
               <Text style={styles.congratsText}>Você está indo muito bem!</Text>
-              <Text style={styles.continueText}>Continue assim 💚</Text>
+              <Text style={styles.continueText}>Faltam apenas 2 exercícios para bater a meta da semana. Continue assim! 💚</Text>
             </View>
+          </View>
+
+          <View style={styles.progressBarBg}>
+            <View style={[styles.progressBarFill, { width: '78%' }]} />
           </View>
         </View>
 
@@ -90,66 +96,57 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: Colors.background,
   },
   scrollContent: {
     paddingHorizontal: 20,
-    paddingBottom: 30,
+    paddingTop: 20,
+    paddingBottom: 120, // Espaço para a Tab Bar não cobrir o conteúdo
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 40,
-    marginBottom: 20,
+    alignItems: 'flex-start',
+    marginBottom: 25,
   },
   headerTextContainer: {
     flex: 1,
     paddingRight: 10,
   },
   greeting: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#1e293b',
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: Colors.text,
   },
   subtitle: {
-    fontSize: 16,
-    color: '#64748b',
-    marginTop: 8,
-    lineHeight: 22,
-  },
-  headerIcons: {
-    alignItems: 'center',
+    fontSize: 15,
+    color: Colors.gray,
+    marginTop: 5,
+    lineHeight: 20,
   },
   notificationBtn: {
-    padding: 5,
-    marginBottom: 10,
+    width: 45,
+    height: 45,
+    borderRadius: 12,
+    backgroundColor: Colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   dot: {
     position: 'absolute',
-    top: 6,
-    right: 8,
+    top: 12,
+    right: 12,
     width: 8,
     height: 8,
-    backgroundColor: '#ef4444',
+    backgroundColor: Colors.error || '#ef4444',
     borderRadius: 4,
-    borderWidth: 1.5,
-    borderColor: '#F8FAFC',
-  },
-  profileImg: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-  },
-  mainCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-    padding: 20,
-    marginTop: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 3,
+    borderWidth: 2,
+    borderColor: Colors.white,
   },
   cardHeader: {
     flexDirection: 'row',
@@ -157,106 +154,111 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 15,
   },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#1e293b',
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  exerciseCount: {
-    color: '#059669',
-    fontWeight: '600',
+  cardTitle: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: Colors.text,
+    marginLeft: 8,
+  },
+  badge: {
+    backgroundColor: Colors.primary + '15',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  badgeText: {
+    color: Colors.primary,
+    fontSize: 12,
+    fontWeight: 'bold',
   },
   exerciseBox: {
-    backgroundColor: '#F1F5F9',
+    backgroundColor: '#f8fafc',
     borderRadius: 16,
     padding: 15,
     flexDirection: 'row',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#f1f5f9',
   },
   exerciseInfo: {
     flex: 1,
   },
   exerciseName: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#1e293b',
+    fontWeight: 'bold',
+    color: Colors.text,
   },
   exerciseDetail: {
     fontSize: 13,
-    color: '#64748b',
+    color: Colors.gray,
     marginTop: 2,
   },
   timeRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 12,
+    marginTop: 10,
   },
   timeText: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '600',
-    color: '#64748b',
-    marginLeft: 6,
+    color: Colors.gray,
+    marginLeft: 5,
   },
   exerciseImg: {
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     borderRadius: 12,
-  },
-  startButton: {
-    backgroundColor: '#064e3b', // Verde escuro idêntico
-    borderRadius: 12,
-    paddingVertical: 16,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  startButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '700',
+    marginLeft: 10,
   },
   progressCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-    padding: 20,
-    marginTop: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 3,
+    marginTop: 5,
   },
   progressRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 15,
+    marginBottom: 15,
   },
   progressCircle: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
-    borderWidth: 6,
-    borderColor: '#065f46',
+    width: 65,
+    height: 65,
+    borderRadius: 33,
+    borderWidth: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 20,
+    marginRight: 15,
   },
   progressPercent: {
     fontSize: 16,
-    fontWeight: '800',
-    color: '#1e293b',
+    fontWeight: 'bold',
+    color: Colors.text,
   },
   progressTextContainer: {
     flex: 1,
   },
   congratsText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#1e293b',
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: Colors.text,
   },
   continueText: {
-    fontSize: 14,
-    color: '#64748b',
-    marginTop: 4,
+    fontSize: 13,
+    color: Colors.gray,
+    marginTop: 2,
+    lineHeight: 18,
+  },
+  progressBarBg: {
+    height: 8,
+    backgroundColor: '#E5E7EB',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: Colors.primary,
   },
 });
 
