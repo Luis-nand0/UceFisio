@@ -3,7 +3,6 @@ import { Text, TextInput, TouchableOpacity, View, SafeAreaView, ScrollView, Aler
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-//estilo
 import { Colors, GlobalStyles } from '../../constants/Theme'; 
 
 export default function Login() {
@@ -13,19 +12,39 @@ export default function Login() {
     const [senha, setSenha] = useState('');
     const [esconderSenha, setEsconderSenha] = useState(true);
 
-    //funcao login
-    const sendLogin = () => {
-        const mockLogin = {
-            'Email': 'teste@teste',
-            'Senha': '123'
-        };
+    const sendLogin = async() => {
 
-        if (email === mockLogin.Email && senha === mockLogin.Senha) {
-            console.log('logado');
-            router.replace('/HomeScreen'); 
-        } else {
-            Alert.alert("Erro", "Usuário ou senha inválidos!");
+        const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
+        const body = {
+            "email": email,
+            "password": senha,
+            "accessMode": "APP",
+            "appId": 1
         }
+
+        console.log('teste', apiUrl.concat('/api/v1/auth/login') )
+
+    const response = await fetch(apiUrl.concat('/api/v1/auth/login'), {
+      method: 'POST', 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+    const data = await response.json()
+
+    console.log(response.status)
+
+    if(response && response.status === 201){
+        router.replace('/HomeScreen'); 
+    }else{
+        alert("Usuário ou senha inválidos!");
+    }
+    
+    console.log(data)
+
     };
 
     return (
