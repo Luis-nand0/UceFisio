@@ -6,6 +6,9 @@ import { useRouter } from 'expo-router';
 //estilo
 import { Colors, GlobalStyles } from '../../constants/Theme'; 
 
+
+const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
 export default function RecoverScreen() {
     const router = useRouter();
 
@@ -16,11 +19,33 @@ export default function RecoverScreen() {
     const [esconderSenha, setEsconderSenha] = useState(true);
 
     // função enviar código
-    const enviarEmail = () => {
+    const enviarEmail = async() => {
         const mockUsuarios = ['teste@teste'];
         const verificarUsuarios = mockUsuarios.includes(email.toLocaleLowerCase().trim());
 
-        if (verificarUsuarios) {
+        const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
+
+        const body = {
+            "email": email
+        }
+
+        const response  = await fetch(apiUrl.concat('/api/v1/auth/forgot-password'),{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+
+        console.log(response)
+
+        const data = await response.json()
+        
+        console.log(data)
+
+        if (response.status === 201) {
             setTela(2);
             setCode('');
             setNewPassword('');
@@ -30,9 +55,30 @@ export default function RecoverScreen() {
     };
 
     //função alterar senha
-    const alterarSenha = () => {
-        const validCode = "12345678";
-        if (code === validCode) {
+    const alterarSenha = async() => {
+        
+        const body = {
+            email: email,
+            code: code,
+            password: newPassword,
+            confirmPassword: newPassword
+        };
+
+        const response = await fetch(apiUrl.concat('/api/v1/auth/reset-password'),{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+
+        console.log(response)
+
+        const data = await response.json()
+
+        if (response.status === 201) {
+            console.log('Data', data)
             Alert.alert("Sucesso", "Senha alterada com sucesso!", [
                 { text: "OK", onPress: () => router.push('/Login') }
             ]);
