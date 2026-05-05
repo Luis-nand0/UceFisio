@@ -9,14 +9,13 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Colors, GlobalStyles } from '../../constants/Theme'; // Importando seu padrão
+import { Colors, GlobalStyles } from '../../constants/Theme';
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         
-        {/* HEADER SECTION - Alinhado com o estilo do Perfil */}
         <View style={styles.header}>
           <View style={styles.headerTextContainer}>
             <Text style={styles.greeting}>Olá, Ana!</Text>
@@ -30,7 +29,6 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {/* PLANO DE HOJE - Usando GlobalStyles.card */}
         <View style={GlobalStyles.card}>
           <View style={styles.cardHeader}>
             <View style={styles.titleRow}>
@@ -62,7 +60,6 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {/* PROGRESSO CARD - Estilo "Meta Semanal" do perfil */}
         <View style={[GlobalStyles.card, styles.progressCard]}>
           <View style={styles.cardHeader}>
             <View style={styles.titleRow}>
@@ -72,14 +69,13 @@ const HomeScreen = () => {
           </View>
           
           <View style={styles.progressRow}>
-            {/* Círculo de Progresso Customizado */}
             <View style={[styles.progressCircle, { borderColor: Colors.primary }]}>
               <Text style={styles.progressPercent}>78%</Text>
             </View>
 
             <View style={styles.progressTextContainer}>
               <Text style={styles.congratsText}>Você está indo muito bem!</Text>
-              <Text style={styles.continueText}>Faltam apenas 2 exercícios para bater a meta da semana. Continue assim! 💚</Text>
+              <Text style={styles.continueText}>Faltam apenas 2 exercícios para bater a meta da semana. Continue assim!</Text>
             </View>
           </View>
 
@@ -101,7 +97,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 120, // Espaço para a Tab Bar não cobrir o conteúdo
+    paddingBottom: 120, 
   },
   header: {
     flexDirection: 'row',
