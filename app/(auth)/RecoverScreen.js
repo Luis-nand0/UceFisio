@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView, ScrollView, Alert } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-//estilo
-import { Colors, GlobalStyles } from '../../constants/Theme'; 
+import { Colors, GlobalStyles } from '../../constants/Theme';
 
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -16,12 +15,11 @@ export default function RecoverScreen() {
     const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [code, setCode] = useState('');
+    const [passConfirmation, setPassConfirmation] = useState('')
     const [esconderSenha, setEsconderSenha] = useState(true);
+    const [esconderSenhaConfirmation, setEsconderSenhaConfirmation] = useState(true);
 
-    // função enviar código
-    const enviarEmail = async() => {
-        const mockUsuarios = ['teste@teste'];
-        const verificarUsuarios = mockUsuarios.includes(email.toLocaleLowerCase().trim());
+    const enviarEmail = async () => {
 
         const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
@@ -30,7 +28,8 @@ export default function RecoverScreen() {
             "email": email
         }
 
-        const response  = await fetch(apiUrl.concat('/api/v1/auth/forgot-password'),{
+
+        const response = await fetch(apiUrl.concat('/api/v1/auth/forgot-password'), {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -42,7 +41,7 @@ export default function RecoverScreen() {
         console.log(response)
 
         const data = await response.json()
-        
+
         console.log(data)
 
         if (response.status === 201) {
@@ -54,60 +53,67 @@ export default function RecoverScreen() {
         }
     };
 
-    //função alterar senha
-    const alterarSenha = async() => {
-        
+    const alterarSenha = async () => {
+
         const body = {
             email: email,
             code: code,
             password: newPassword,
-            confirmPassword: newPassword
+            confirmPassword: passConfirmation
         };
 
-        const response = await fetch(apiUrl.concat('/api/v1/auth/reset-password'),{
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body)
-        })
+        if (newPassword === passConfirmation) {
+            const response = await fetch(apiUrl.concat('/api/v1/auth/reset-password'), {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body)
+            })
+            console.log(response)
 
-        console.log(response)
+            const data = await response.json()
 
-        const data = await response.json()
+            if (response.status === 201) {
+                console.log('Data', data)
+                alert('Sucesso')
+                router.push('/Login')
 
-        if (response.status === 201) {
-            console.log('Data', data)
-            Alert.alert("Sucesso", "Senha alterada com sucesso!", [
-                { text: "OK", onPress: () => router.push('/Login') }
-            ]);
+                Alert.alert("Sucesso", "Senha alterada com sucesso!", [
+                    { text: "OK", onPress: () => router.push('/Login') }
+                ]);
+            } else {
+                Alert.alert("Erro", "Código inválido!");
+            }
         } else {
-            Alert.alert("Erro", "Código inválido!");
+            alert('As senhas não coincidem')
         }
+
+
     };
 
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContainer}>
-                
+
                 <View style={styles.header}>
                     <Text style={[styles.brand, { color: Colors.primary }]}>APP FISIO</Text>
                 </View>
                 <View style={GlobalStyles.card}>
                     <Text style={styles.title}>Recuperar Senha</Text>
-                    
+
                     {tela === 1 ? (
                         <View>
                             <Text style={styles.subtitle}>Insira seu e-mail para receber um código de 8 dígitos.</Text>
-                            
+
                             <Text style={styles.label}>E-MAIL CADASTRADO</Text>
                             <View style={GlobalStyles.inputContainer}>
                                 <MaterialCommunityIcons name="email-outline" size={20} color={Colors.primary} style={styles.iconStyle} />
-                                <TextInput 
+                                <TextInput
                                     style={styles.input}
-                                    placeholder="exemplo@email.com" 
-                                    onChangeText={setEmail} 
+                                    placeholder="exemplo@email.com"
+                                    onChangeText={setEmail}
                                     value={email}
                                     keyboardType="email-address"
                                     autoCapitalize="none"
@@ -129,10 +135,10 @@ export default function RecoverScreen() {
                             <Text style={styles.label}>CÓDIGO DE ACESSO</Text>
                             <View style={GlobalStyles.inputContainer}>
                                 <MaterialCommunityIcons name="numeric-8-box-outline" size={20} color={Colors.primary} style={styles.iconStyle} />
-                                <TextInput 
+                                <TextInput
                                     style={styles.input}
-                                    placeholder="Digite o código" 
-                                    onChangeText={setCode} 
+                                    placeholder="Digite o código"
+                                    onChangeText={setCode}
                                     value={code}
                                 />
                             </View>
@@ -140,21 +146,45 @@ export default function RecoverScreen() {
                             <Text style={styles.label}>NOVA SENHA</Text>
                             <View style={GlobalStyles.inputContainer}>
                                 <MaterialCommunityIcons name="lock-outline" size={20} color={Colors.primary} style={styles.iconStyle} />
-                                <TextInput 
+                                <TextInput
                                     style={styles.input}
-                                    placeholder="Nova Senha" 
+                                    placeholder="Nova Senha"
                                     secureTextEntry={esconderSenha}
-                                    onChangeText={setNewPassword} 
+                                    onChangeText={setNewPassword}
                                     value={newPassword}
                                 />
-                                <TouchableOpacity 
+                                <TouchableOpacity
                                     onPress={() => setEsconderSenha(!esconderSenha)}
                                     style={styles.eyeButton}
                                 >
-                                    <MaterialCommunityIcons 
-                                        name={esconderSenha ? "eye-off-outline" : "eye-outline"} 
-                                        size={22} 
-                                        color={Colors.gray} 
+                                    <MaterialCommunityIcons
+                                        name={esconderSenha ? "eye-off-outline" : "eye-outline"}
+                                        size={22}
+                                        color={Colors.gray}
+                                    />
+                                </TouchableOpacity>
+
+                            </View>
+
+                            <View style={GlobalStyles.inputContainer}>
+                                <MaterialCommunityIcons name="lock-outline" size={20} color={Colors.primary} style={styles.iconStyle} />
+
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Confirmar senha"
+                                    secureTextEntry={esconderSenhaConfirmation}
+                                    onChangeText={setPassConfirmation}
+                                    value={passConfirmation}
+                                />
+
+                                <TouchableOpacity
+                                    onPress={() => setEsconderSenhaConfirmation(!esconderSenhaConfirmation)}
+                                    style={styles.eyeButton}
+                                >
+                                    <MaterialCommunityIcons
+                                        name={esconderSenhaConfirmation ? "eye-off-outline" : "eye-outline"}
+                                        size={22}
+                                        color={Colors.gray}
                                     />
                                 </TouchableOpacity>
                             </View>
