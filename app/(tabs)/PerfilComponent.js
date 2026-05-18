@@ -12,7 +12,7 @@ export default function PerfilComponent() {
     "profile": { "id": 5, "name": "Maria Aparecida Souza", "email": "paciente1@unifae.local", "role": "PACIENTE" },
     "responsibleStudent": { "name": "André Lucas", "photoUrl": 'https://i.pravatar.cc/150?u=andre' },
     "coordinator": { "name": "Dra. Vanessa", "photoUrl": 'https://i.pravatar.cc/150?u=vanessa' },
-    "weeklyProgress": { "percentCompleted": 45 } 
+    "weeklyProgress": { "percentCompleted": 45 }
   };
 
   const MenuItem = ({ icon, title, color = Colors.text }) => (
@@ -30,7 +30,7 @@ export default function PerfilComponent() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        
+
 
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Meu Perfil</Text>
@@ -41,9 +41,9 @@ export default function PerfilComponent() {
 
         <View style={styles.profileSection}>
           <View style={styles.imageWrapper}>
-            <Image 
-              source={{ uri: 'https://i.pravatar.cc/150?u=maria' }} 
-              style={styles.profileImage} 
+            <Image
+              source={{ uri: 'https://i.pravatar.cc/150?u=maria' }}
+              style={styles.profileImage}
             />
             <TouchableOpacity style={styles.editBadge}>
               <MaterialCommunityIcons name="camera" size={16} color="white" />
@@ -96,6 +96,16 @@ export default function PerfilComponent() {
           <MenuItem icon="shield-check-outline" title="Privacidade" color="#10b981" />
           <View style={styles.divider} />
           <MenuItem icon="help-circle-outline" title="Suporte e Ajuda" color="#f59e0b" />
+          <View style={styles.divider} />
+          <MenuItem
+            icon="logout"
+            title="Sair da Conta"
+            color="#ef4444"
+            onPress={() => {
+              console.log('Usuário deslogou');
+              router.replace('/Login');
+            }}
+          />
         </View>
 
       </ScrollView>
@@ -106,9 +116,9 @@ export default function PerfilComponent() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
   scrollContent: { padding: 20, paddingBottom: 40 },
-  header: { 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 25
   },
@@ -116,23 +126,23 @@ const styles = StyleSheet.create({
   profileSection: { alignItems: 'center', marginBottom: 30 },
   imageWrapper: { position: 'relative' },
   profileImage: { width: 110, height: 110, borderRadius: 55, borderWidth: 3, borderColor: Colors.white },
-  editBadge: { 
-    position: 'absolute', bottom: 0, right: 0, 
-    backgroundColor: Colors.primary, width: 32, height: 32, 
+  editBadge: {
+    position: 'absolute', bottom: 0, right: 0,
+    backgroundColor: Colors.primary, width: 32, height: 32,
     borderRadius: 16, justifyContent: 'center', alignItems: 'center',
     borderWidth: 3, borderColor: Colors.white
   },
   userName: { fontSize: 22, fontWeight: 'bold', color: Colors.text, marginTop: 15 },
   userEmail: { fontSize: 14, color: Colors.gray, marginTop: 4 },
-  badgeRole: { 
-    backgroundColor: Colors.primary + '20', 
-    paddingHorizontal: 12, paddingVertical: 4, 
-    borderRadius: 20, marginTop: 10 
+  badgeRole: {
+    backgroundColor: Colors.primary + '20',
+    paddingHorizontal: 12, paddingVertical: 4,
+    borderRadius: 20, marginTop: 10
   },
   badgeText: { color: Colors.primary, fontSize: 12, fontWeight: 'bold' },
-  
+
   sectionTitle: { fontSize: 16, fontWeight: 'bold', color: Colors.text, marginTop: 25, marginBottom: 15 },
-  
+
   metaCard: { borderLeftWidth: 5, borderLeftColor: Colors.primary },
   cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
   cardLabel: { fontSize: 12, fontWeight: 'bold', color: Colors.gray, marginLeft: 8 },
