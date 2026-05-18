@@ -123,6 +123,18 @@ export default function TrainingScreen() {
           );
         })}
 
+        <View style={styles.tipsCard}>
+        <View style={styles.tipsContent}>
+        <View style={styles.tipsHeaderRow}>
+          <Text style={styles.tipsTitle}>Dicas da Fisioterapeuta</Text>
+            <MaterialCommunityIcons name="file-document-edit-outline" size={24} color="#CBD5E1" />
+        </View>
+          <Text style={styles.tipsText}>
+            "Foque na qualidade do movimento, não na carga. Se sentir uma dor aguda, 
+            diminua a amplitude e respire profundamente durante a execução."
+        </Text>
+        </View>
+</View>
         <TouchableOpacity 
           style={styles.finishButton}
           onPress={() => alert('Atividade Concluída!')}
@@ -233,5 +245,38 @@ const styles = StyleSheet.create({
     marginTop: 25,
     elevation: 3
   },
-  finishButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 }
+  finishButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
+  tipsCard: {
+    backgroundColor: '#F9FAFB',
+    borderRadius: 20,
+    padding: 20,
+    marginVertical: 20,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  tipsIconContainer: {
+    marginRight: 15,
+    alignItems: 'center',
+  },
+  tipsContent: {
+    flex: 1,
+  },
+  tipsHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  tipsTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.text,
+  },
+  tipsText: {
+    fontSize: 14,
+    color: '#4B5563',
+    fontStyle: 'italic',
+    lineHeight: 20,
+  },
 });
