@@ -66,6 +66,40 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
+        <View style={[GlobalStyles.card, {marginTop: 15}]}>
+        <View style={styles.cardHeader}>
+            <View style={styles.titleRow}>
+              <MaterialCommunityIcons name="calendar-check" size={20} color={Colors.primary} />
+              <Text style={styles.cardTitle}>Plano semanal</Text>
+            </View>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>7 exercícios</Text>
+            </View>
+        </View>
+
+        <View style={styles.exerciseBox}>
+            <View style={styles.exerciseInfo}>
+              <Text style={styles.exerciseName}>Exercícios Semanais</Text>
+              <Text style={styles.exerciseDetail}>Pós-cirúrgico • Câncer de mama</Text>
+              <View style={styles.timeRow}>
+                <MaterialCommunityIcons name="clock-outline" size={16} color={Colors.gray} />
+                <Text style={styles.timeText}>65 min</Text>
+              </View>
+            </View>
+            <Image 
+              source={{ uri: 'https://i.pravatar.cc/100?u=ex1' }} 
+              style={styles.exerciseImg}
+            />
+          </View>
+
+          <TouchableOpacity 
+            style={[GlobalStyles.button, { marginTop: 20 }]} 
+            onPress={() => router.push('/TrainingScreen')}
+          >
+            <Text style={GlobalStyles.buttonText}>Visualizar exercícios</Text>
+          </TouchableOpacity>
+        </View>
+
         <View style={[GlobalStyles.card, styles.progressCard]}>
           <View style={styles.cardHeader}>
             <View style={styles.titleRow}>
