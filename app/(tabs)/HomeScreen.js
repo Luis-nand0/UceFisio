@@ -10,8 +10,11 @@ import {
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors, GlobalStyles } from '../../constants/Theme';
+import { useRouter } from 'expo-router'; 
 
 const HomeScreen = () => {
+  const router = useRouter(); 
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
@@ -55,7 +58,10 @@ const HomeScreen = () => {
             />
           </View>
 
-          <TouchableOpacity style={[GlobalStyles.button, { marginTop: 20 }]} onPress={() => {}}>
+          <TouchableOpacity 
+            style={[GlobalStyles.button, { marginTop: 20 }]} 
+            onPress={() => router.push('/TrainingScreen')}
+          >
             <Text style={GlobalStyles.buttonText}>Iniciar exercício</Text>
           </TouchableOpacity>
         </View>
