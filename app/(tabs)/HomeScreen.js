@@ -94,13 +94,13 @@ const HomeScreen = () => {
 
           <TouchableOpacity 
             style={[GlobalStyles.button, { marginTop: 20 }]} 
-            onPress={() => router.push('/TrainingScreen')}
+            onPress={() => router.push('/TrainingScreenWeekly')}
           >
             <Text style={GlobalStyles.buttonText}>Visualizar exercícios</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={[GlobalStyles.card, styles.progressCard]}>
+        <View style={[GlobalStyles.card, styles.progressCard, {marginTop: 15}]}>
           <View style={styles.cardHeader}>
             <View style={styles.titleRow}>
               <MaterialCommunityIcons name="trending-up" size={20} color={Colors.primary} />
