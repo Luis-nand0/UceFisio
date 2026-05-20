@@ -150,20 +150,15 @@ export default function FeedbackScreen() {
           />
         </View>
 
-        <View style={styles.footerBrand}>
-          <Text style={styles.brandText}>UNIFAE Care</Text>
-          <Text style={styles.brandSub}>Seu progresso é nossa prioridade.</Text>
-        </View>
-
         <TouchableOpacity 
-          style={[styles.saveButton, loading && { opacity: 0.7 }]} 
+          style={[styles.finishButton, loading && { opacity: 0.7 }]} 
           onPress={handleSaveFeedback}
           disabled={loading}
         >
           {loading ? (
             <ActivityIndicator color="#fff" />
           ) : (
-            <Text style={styles.saveButtonText}>Salvar Feedback</Text>
+            <Text style={styles.finishButtonText}>Salvar Feedback</Text>
           )}
         </TouchableOpacity>
 
@@ -223,6 +218,21 @@ const styles = StyleSheet.create({
   brandText: { fontSize: 18, fontWeight: 'bold', color: '#15803d' },
   brandSub: { fontSize: 12, color: Colors.gray, marginTop: 2 },
 
-  saveButton: { backgroundColor: '#15803d', padding: 16, borderRadius: 16, alignItems: 'center', elevation: 3 },
-  saveButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 }
+ finishButton: { 
+    backgroundColor: Colors.primary, 
+    padding: 18, 
+    borderRadius: 18, 
+    alignItems: 'center', 
+    elevation: 3
+  },
+  finishButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
+  tipsCard: {
+    backgroundColor: '#F9FAFB',
+    borderRadius: 20,
+    padding: 20,
+    marginVertical: 20,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  }
 });

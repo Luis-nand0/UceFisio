@@ -55,11 +55,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-    name="TrainingScreen"
-    options={{
-      href: null, 
-    }}
-  />
+        name="TrainingScreen"
+        options={{
+          href: null, 
+         }}
+      />
+      <Tabs.Screen
+        name="FeedbackScreen"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }

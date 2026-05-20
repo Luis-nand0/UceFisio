@@ -137,7 +137,7 @@ export default function TrainingScreen() {
 </View>
         <TouchableOpacity 
           style={styles.finishButton}
-          onPress={() => alert('Atividade Concluída!')}
+          onPress={() => router.push('/FeedbackScreen')}
         >
           <Text style={styles.finishButtonText}>Concluir Atividade</Text>
         </TouchableOpacity>
