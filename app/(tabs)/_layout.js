@@ -66,6 +66,18 @@ export default function TabLayout() {
           href: null,
         }}
       />
+      <Tabs.Screen
+        name="TrainingScreenWeekly"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="DailyExercisesScreen"
+        options={{  
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }

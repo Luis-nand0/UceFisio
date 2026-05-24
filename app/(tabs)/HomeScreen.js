@@ -60,7 +60,7 @@ const HomeScreen = () => {
 
           <TouchableOpacity 
             style={[GlobalStyles.button, { marginTop: 20 }]} 
-            onPress={() => router.push('/TrainingScreen')}
+            onPress={() => router.push('/DailyExercisesScreen')}
           >
             <Text style={GlobalStyles.buttonText}>Iniciar exercício</Text>
           </TouchableOpacity>
